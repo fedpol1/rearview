@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "rearview",
+  "version": "${version}",
+
+  "name": "Rearview",
+  "description": "Adds a simple look-behind keybind.",
+  "authors": [
+    "FEDPOL1"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/rearview/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [],
+    "client": [
+      "com.fedpol1.rearview.RearviewClient"
+    ]
+  },
+  "mixins": [
+    "rearview.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "fabric-api": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
