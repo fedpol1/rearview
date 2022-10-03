@@ -37,6 +37,12 @@ public class ModMenuEntry implements ModMenuApi{
                     .setSaveConsumer(newValue -> ModConfig.PITCH_HANDLING = newValue)
                     .build());
 
+            // camera lock
+            misc.addEntry(entryBuilder.startBooleanToggle(Text.translatable("rearview.config.lock"), ModConfig.CameraLock)
+                    .setDefaultValue(false)
+                    .setSaveConsumer(newValue -> ModConfig.CameraLock = newValue)
+                    .build());
+
             // hold/toggle
             misc.addEntry(entryBuilder.startEnumSelector(Text.translatable("rearview.config.look_hold_toggle"), LookHoldToggle.class, ModConfig.LOOK_HOLD_TOGGLE)
                     .setDefaultValue(LookHoldToggle.HOLD)

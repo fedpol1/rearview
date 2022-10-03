@@ -13,6 +13,7 @@ public class ModConfig {
     private static ModConfigBuilder configBuilder;
     public static YawHandling YAW_HANDLING;
     public static PitchHandling PITCH_HANDLING;
+    public static boolean CameraLock;
     public static LookHoldToggle LOOK_HOLD_TOGGLE;
 
 
@@ -27,12 +28,14 @@ public class ModConfig {
     private static void createConfig() {
         configBuilder.addKeyAndValue(new Pair<>("yaw_handling", "REFLECT"));
         configBuilder.addKeyAndValue(new Pair<>("pitch_handling", "REFLECT"));
+        configBuilder.addKeyAndValue(new Pair<>("camera_lock", "false"));
         configBuilder.addKeyAndValue(new Pair<>("look_hold_toggle", "HOLD"));
     }
 
     private static void assignConfig() {
         YAW_HANDLING = YawHandling.valueOf(CONFIG.getOrDefault("yaw_handling", "REFLECT"));
         PITCH_HANDLING = PitchHandling.valueOf(CONFIG.getOrDefault("pitch_handling", "REFLECT"));
+        CameraLock = Boolean.parseBoolean(CONFIG.getOrDefault("camera_lock", "false"));
         LOOK_HOLD_TOGGLE = LookHoldToggle.valueOf(CONFIG.getOrDefault("look_hold_toggle", "HOLD"));
     }
 
@@ -43,6 +46,7 @@ public class ModConfig {
             fw.write(
                     "yaw_handling=" + YAW_HANDLING.toString() + "\n" +
                     "pitch_handling=" + PITCH_HANDLING.toString() + "\n" +
+                    "camera_lock=" + CameraLock + "\n" +
                     "look_hold_toggle=" + LOOK_HOLD_TOGGLE.toString() + "\n"
             );
             fw.close();

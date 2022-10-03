@@ -1,6 +1,6 @@
 package com.fedpol1.rearview.mixin;
 
-import com.fedpol1.rearview.config.YawHandling;
+import com.fedpol1.rearview.util.CameraAngleManager;
 import net.minecraft.client.render.Camera;
 
 import net.minecraft.entity.Entity;
@@ -16,8 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import com.fedpol1.rearview.event.KeyInputHandler;
 import com.fedpol1.rearview.config.ModConfig;
-
-import java.security.Key;
 
 @Mixin(Camera.class)
 public abstract class CameraMixin {
@@ -56,38 +54,11 @@ public abstract class CameraMixin {
     protected void injectRotation(float yaw, float pitch, CallbackInfo info) {
         if(KeyInputHandler.isLookingBehind()) {
             this.rotation.set(0.0f, 0.0f, 0.0f, 1.0f);
-            switch (ModConfig.YAW_HANDLING) {
-                case KEEP -> {
-                    this.yaw = yaw;
-                    this.rotation.hamiltonProduct(Vec3f.POSITIVE_Y.getDegreesQuaternion(-yaw));
-                }
-                case REFLECT -> {
-                    this.yaw = yaw + 180.0f;
-                    this.rotation.hamiltonProduct(Vec3f.POSITIVE_Y.getDegreesQuaternion(-yaw - 180.0f));
-                }
-            }
-            switch (ModConfig.PITCH_HANDLING) {
-                case KEEP -> {
-                    this.pitch = pitch;
-                    this.rotation.hamiltonProduct(Vec3f.POSITIVE_X.getDegreesQuaternion(pitch));
-                }
-                case REFLECT -> {
-                    this.pitch = -pitch;
-                    this.rotation.hamiltonProduct(Vec3f.POSITIVE_X.getDegreesQuaternion(-pitch));
-                }
-                case ZERO -> {
-                    this.pitch = 0.0f;
-                    this.rotation.hamiltonProduct(Vec3f.POSITIVE_X.getDegreesQuaternion(0.0f));
-                }
-                case LOOK_UP -> {
-                    this.pitch = -90.0f;
-                    this.rotation.hamiltonProduct(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0f));
-                }
-                case LOOK_DOWN -> {
-                    this.pitch = 90.0f;
-                    this.rotation.hamiltonProduct(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0f));
-                }
-            }
+            CameraAngleManager.setAngles(yaw,pitch);
+            this.yaw = CameraAngleManager.getYaw();
+            this.pitch = CameraAngleManager.getPitch();
+            this.rotation.hamiltonProduct(Vec3f.POSITIVE_Y.getDegreesQuaternion(-CameraAngleManager.getYaw()));
+            this.rotation.hamiltonProduct(Vec3f.POSITIVE_X.getDegreesQuaternion(CameraAngleManager.getPitch()));
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.fedpol1.rearview.event;
 
+import com.fedpol1.rearview.util.CameraAngleManager;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
@@ -30,10 +31,12 @@ public class KeyInputHandler {
                     if (lookbehindKey.isPressed()) {
                         lookbehind = true;
                     }
+                    else CameraAngleManager.refresh();
                 }
                 case TOGGLE -> {
                     if (lookbehindKey.wasPressed()) {
                         lookbehind = !lookbehind;
+                        CameraAngleManager.refresh();
                     }
                 }
             }

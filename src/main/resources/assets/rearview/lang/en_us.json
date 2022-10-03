@@ -2,5 +2,6 @@
   "key.rearview.lookbehind": "Look Behind",
   "rearview.config.yaw": "Yaw Modifier",
   "rearview.config.pitch": "Pitch Modifier",
+  "rearview.config.lock": "Lock Camera",
   "rearview.config.look_hold_toggle": "Look Behind:"
 }
