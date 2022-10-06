@@ -38,9 +38,9 @@ public class ModMenuEntry implements ModMenuApi{
                     .build());
 
             // camera lock
-            misc.addEntry(entryBuilder.startBooleanToggle(Text.translatable("rearview.config.lock"), ModConfig.CameraLock)
+            misc.addEntry(entryBuilder.startBooleanToggle(Text.translatable("rearview.config.lock"), ModConfig.CAMERA_LOCK)
                     .setDefaultValue(false)
-                    .setSaveConsumer(newValue -> ModConfig.CameraLock = newValue)
+                    .setSaveConsumer(newValue -> ModConfig.CAMERA_LOCK = newValue)
                     .build());
 
             // hold/toggle

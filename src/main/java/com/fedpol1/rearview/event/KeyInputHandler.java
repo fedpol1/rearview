@@ -7,7 +7,6 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 import com.fedpol1.rearview.config.ModConfig;
-import com.fedpol1.rearview.config.LookHoldToggle;
 
 public class KeyInputHandler {
 
@@ -24,7 +23,6 @@ public class KeyInputHandler {
 
     public static void registerKeypress() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-
             switch (ModConfig.LOOK_HOLD_TOGGLE) {
                 case HOLD -> {
                     lookbehind = false;
