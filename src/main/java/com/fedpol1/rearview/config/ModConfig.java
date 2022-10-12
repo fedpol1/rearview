@@ -22,7 +22,6 @@ public class ModConfig {
     public static final String S_LOOK_HOLD_TOGGLE = "look_hold_toggle";
 
     public static void registerConfig() {
-        ModConfig.setDefaultConfig();
         ModConfig.readConfig();
         ModConfig.writeConfig();
     }
@@ -49,8 +48,9 @@ public class ModConfig {
                 }
             }
         }
-        catch (IOException e) {
-            RearviewClient.LOGGER.error("Could not read configuration file.");
+        catch (IOException | IllegalArgumentException e) {
+            RearviewClient.LOGGER.error("Could not read configuration file.\n" + e.getMessage());
+            RearviewClient.LOGGER.info("Setting default configuration.");
             ModConfig.setDefaultConfig();
         }
     }
@@ -67,7 +67,7 @@ public class ModConfig {
             fw.close();
         }
         catch (IOException e) {
-            RearviewClient.LOGGER.error("Could not write configuration file.");
+            RearviewClient.LOGGER.error("Could not write configuration file.\n" + e.getMessage());
         }
     }
 }

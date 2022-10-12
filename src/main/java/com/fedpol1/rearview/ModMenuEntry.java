@@ -25,13 +25,13 @@ public class ModMenuEntry implements ModMenuApi{
 
             ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-            // yaw
+            // yaw handling
             misc.addEntry(entryBuilder.startEnumSelector(Text.translatable("rearview.config.yaw"), YawHandling.class, ModConfig.YAW_HANDLING)
                     .setDefaultValue(YawHandling.REFLECT)
                     .setSaveConsumer(newValue -> ModConfig.YAW_HANDLING = newValue)
                     .build());
 
-            // pitch
+            // pitch handling
             misc.addEntry(entryBuilder.startEnumSelector(Text.translatable("rearview.config.pitch"), PitchHandling.class, ModConfig.PITCH_HANDLING)
                     .setDefaultValue(PitchHandling.REFLECT)
                     .setSaveConsumer(newValue -> ModConfig.PITCH_HANDLING = newValue)
