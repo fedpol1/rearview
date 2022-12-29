@@ -2,7 +2,6 @@ package com.fedpol1.rearview.mixin;
 
 import com.fedpol1.rearview.util.CameraAngleManager;
 import net.minecraft.client.render.Camera;
-
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3f;
 import org.spongepowered.asm.mixin.Final;

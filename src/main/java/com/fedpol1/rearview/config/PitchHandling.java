@@ -5,5 +5,6 @@ public enum PitchHandling {
     KEEP,
     ZERO,
     LOOK_UP,
-    LOOK_DOWN
+    LOOK_DOWN,
+    INHERIT
 }
