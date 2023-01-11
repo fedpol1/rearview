@@ -1,7 +1,11 @@
 {
   "key.rearview.lookbehind": "Look Behind",
-  "rearview.config.yaw": "Yaw Modifier",
-  "rearview.config.pitch": "Pitch Modifier",
+  "rearview.config.yaw_transform": "Yaw Modifier",
+  "rearview.config.pitch_transform": "Pitch Modifier",
+  "rearview.config.yaw_source": "Yaw Source",
+  "rearview.config.pitch_source": "Pitch Source",
+  "rearview.config.yaw_aux": "Yaw Constant",
+  "rearview.config.pitch_aux": "Pitch Constant",
   "rearview.config.lock": "Lock Camera",
-  "rearview.config.look_hold_toggle": "Look Behind:"
+  "rearview.config.look_hold_toggle": "Camera:"
 }

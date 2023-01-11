@@ -1,7 +1,6 @@
 package com.fedpol1.rearview.config;
 
-public enum YawHandling {
+public enum AngleHandling {
     REFLECT,
-    KEEP,
-    INHERIT
+    KEEP
 }
