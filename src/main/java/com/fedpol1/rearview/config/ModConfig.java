@@ -1,12 +1,12 @@
 package com.fedpol1.rearview.config;
 
 import com.fedpol1.rearview.RearviewClient;
-import dev.isxander.yacl.api.ConfigCategory;
-import dev.isxander.yacl.api.Option;
-import dev.isxander.yacl.api.YetAnotherConfigLib;
-import dev.isxander.yacl.gui.controllers.TickBoxController;
-import dev.isxander.yacl.gui.controllers.cycling.EnumController;
-import dev.isxander.yacl.gui.controllers.string.number.FloatFieldController;
+import dev.isxander.yacl3.api.ConfigCategory;
+import dev.isxander.yacl3.api.Option;
+import dev.isxander.yacl3.api.YetAnotherConfigLib;
+import dev.isxander.yacl3.api.controller.EnumControllerBuilder;
+import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
+import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
@@ -105,45 +105,45 @@ public class ModConfig {
                 .save(ModConfig::writeConfig)
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable(RearviewClient.MODID + ".config.category.misc"))
-                        .option(Option.createBuilder(AngleHandling.class)
+                        .option(Option.<AngleHandling>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.yaw_transform"))
                                 .binding(AngleHandling.REFLECT, () -> ModConfig.YAW_HANDLING, v -> ModConfig.YAW_HANDLING = v)
-                                .controller(EnumController::new)
+                                .controller(EnumControllerBuilder::create)
                                 .build())
-                        .option(Option.createBuilder(AngleHandling.class)
+                        .option(Option.<AngleHandling>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.pitch_transform"))
                                 .binding(AngleHandling.REFLECT, () -> ModConfig.PITCH_HANDLING, v -> ModConfig.PITCH_HANDLING = v)
-                                .controller(EnumController::new)
+                                .controller(EnumControllerBuilder::create)
                                 .build())
-                        .option(Option.createBuilder(AngleSource.class)
+                        .option(Option.<AngleSource>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.yaw_source"))
                                 .binding(AngleSource.SELF, () -> ModConfig.YAW_SOURCE, v -> ModConfig.YAW_SOURCE = v)
-                                .controller(EnumController::new)
+                                .controller(EnumControllerBuilder::create)
                                 .build())
-                        .option(Option.createBuilder(AngleSource.class)
+                        .option(Option.<AngleSource>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.pitch_source"))
                                 .binding(AngleSource.SELF, () -> ModConfig.PITCH_SOURCE, v -> ModConfig.PITCH_SOURCE = v)
-                                .controller(EnumController::new)
+                                .controller(EnumControllerBuilder::create)
                                 .build())
-                        .option(Option.createBuilder(Float.class)
+                        .option(Option.<Float>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.yaw_aux"))
                                 .binding(0.0f, () -> ModConfig.YAW_AUX, v -> ModConfig.YAW_AUX = v)
-                                .controller(FloatFieldController::new)
+                                .controller(FloatFieldControllerBuilder::create)
                                 .build())
-                        .option(Option.createBuilder(Float.class)
+                        .option(Option.<Float>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.pitch_aux"))
                                 .binding(0.0f, () -> ModConfig.PITCH_AUX, v -> ModConfig.PITCH_AUX = v)
-                                .controller(FloatFieldController::new)
+                                .controller(FloatFieldControllerBuilder::create)
                                 .build())
-                        .option(Option.createBuilder(Boolean.class)
+                        .option(Option.<Boolean>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.lock"))
                                 .binding(false, () -> ModConfig.CAMERA_LOCK, v -> ModConfig.CAMERA_LOCK = v)
-                                .controller(TickBoxController::new)
+                                .controller(TickBoxControllerBuilder::create)
                                 .build())
-                        .option(Option.createBuilder(LookHoldToggle.class)
+                        .option(Option.<LookHoldToggle>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.look_hold_toggle"))
                                 .binding(LookHoldToggle.HOLD, () -> ModConfig.LOOK_HOLD_TOGGLE, v -> ModConfig.LOOK_HOLD_TOGGLE = v)
-                                .controller(EnumController::new)
+                                .controller(EnumControllerBuilder::create)
                                 .build())
                         .build())
                 .build()
