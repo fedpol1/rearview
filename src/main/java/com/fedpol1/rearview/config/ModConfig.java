@@ -26,7 +26,8 @@ public class ModConfig {
     public static float YAW_AUX;
     public static float PITCH_AUX;
     public static boolean CAMERA_LOCK;
-    public static LookHoldToggle LOOK_HOLD_TOGGLE;
+    public static HoldToggle LOOK_HOLD_TOGGLE;
+    public static HoldToggle SHOW_ROTATION_HOLD_TOGGLE;
     public static final String S_YAW_HANDLING = "yaw_handling";
     public static final String S_PITCH_HANDLING = "pitch_handling";
     public static final String S_YAW_SOURCE = "yaw_source";
@@ -35,6 +36,7 @@ public class ModConfig {
     public static final String S_PITCH_AUX = "pitch_aux";
     public static final String S_CAMERA_LOCK = "camera_lock";
     public static final String S_LOOK_HOLD_TOGGLE = "look_hold_toggle";
+    public static final String S_SHOW_ROTATION_HOLD_TOGGLE = "show_rotation_hold_toggle";
 
     public static void registerConfig() {
         ModConfig.readConfig();
@@ -49,7 +51,8 @@ public class ModConfig {
         ModConfig.YAW_AUX = 0.0f;
         ModConfig.PITCH_AUX = 0.0f;
         ModConfig.CAMERA_LOCK = false;
-        ModConfig.LOOK_HOLD_TOGGLE = LookHoldToggle.HOLD;
+        ModConfig.LOOK_HOLD_TOGGLE = HoldToggle.HOLD;
+        ModConfig.SHOW_ROTATION_HOLD_TOGGLE = HoldToggle.TOGGLE;
     }
 
     public static void readConfig() {
@@ -68,7 +71,8 @@ public class ModConfig {
                     case S_YAW_AUX -> ModConfig.YAW_AUX = Float.parseFloat(split[1]);
                     case S_PITCH_AUX -> ModConfig.PITCH_AUX = Float.parseFloat(split[1]);
                     case S_CAMERA_LOCK -> ModConfig.CAMERA_LOCK = Boolean.parseBoolean(split[1]);
-                    case S_LOOK_HOLD_TOGGLE -> ModConfig.LOOK_HOLD_TOGGLE = LookHoldToggle.valueOf(split[1]);
+                    case S_LOOK_HOLD_TOGGLE -> ModConfig.LOOK_HOLD_TOGGLE = HoldToggle.valueOf(split[1]);
+                    case S_SHOW_ROTATION_HOLD_TOGGLE -> ModConfig.SHOW_ROTATION_HOLD_TOGGLE = HoldToggle.valueOf(split[1]);
                 }
             }
         }
@@ -89,7 +93,8 @@ public class ModConfig {
                     S_YAW_AUX + "=" + ModConfig.YAW_AUX + "\n" +
                     S_PITCH_AUX + "=" + ModConfig.PITCH_AUX + "\n" +
                     S_CAMERA_LOCK + "=" + ModConfig.CAMERA_LOCK + "\n" +
-                    S_LOOK_HOLD_TOGGLE + "=" + ModConfig.LOOK_HOLD_TOGGLE + "\n";
+                    S_LOOK_HOLD_TOGGLE + "=" + ModConfig.LOOK_HOLD_TOGGLE + "\n" +
+                    S_SHOW_ROTATION_HOLD_TOGGLE + "=" + ModConfig.SHOW_ROTATION_HOLD_TOGGLE + "\n";
 
             fw.write(acc);
             fw.close();
@@ -108,22 +113,22 @@ public class ModConfig {
                         .option(Option.<AngleHandling>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.yaw_transform"))
                                 .binding(AngleHandling.REFLECT, () -> ModConfig.YAW_HANDLING, v -> ModConfig.YAW_HANDLING = v)
-                                .controller(EnumControllerBuilder::create)
+                                .controller(o -> EnumControllerBuilder.create(o).enumClass(AngleHandling.class))
                                 .build())
                         .option(Option.<AngleHandling>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.pitch_transform"))
                                 .binding(AngleHandling.REFLECT, () -> ModConfig.PITCH_HANDLING, v -> ModConfig.PITCH_HANDLING = v)
-                                .controller(EnumControllerBuilder::create)
+                                .controller(o -> EnumControllerBuilder.create(o).enumClass(AngleHandling.class))
                                 .build())
                         .option(Option.<AngleSource>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.yaw_source"))
                                 .binding(AngleSource.SELF, () -> ModConfig.YAW_SOURCE, v -> ModConfig.YAW_SOURCE = v)
-                                .controller(EnumControllerBuilder::create)
+                                .controller(o -> EnumControllerBuilder.create(o).enumClass(AngleSource.class))
                                 .build())
                         .option(Option.<AngleSource>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.pitch_source"))
                                 .binding(AngleSource.SELF, () -> ModConfig.PITCH_SOURCE, v -> ModConfig.PITCH_SOURCE = v)
-                                .controller(EnumControllerBuilder::create)
+                                .controller(o -> EnumControllerBuilder.create(o).enumClass(AngleSource.class))
                                 .build())
                         .option(Option.<Float>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.yaw_aux"))
@@ -140,10 +145,15 @@ public class ModConfig {
                                 .binding(false, () -> ModConfig.CAMERA_LOCK, v -> ModConfig.CAMERA_LOCK = v)
                                 .controller(TickBoxControllerBuilder::create)
                                 .build())
-                        .option(Option.<LookHoldToggle>createBuilder()
+                        .option(Option.<HoldToggle>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.look_hold_toggle"))
-                                .binding(LookHoldToggle.HOLD, () -> ModConfig.LOOK_HOLD_TOGGLE, v -> ModConfig.LOOK_HOLD_TOGGLE = v)
-                                .controller(EnumControllerBuilder::create)
+                                .binding(HoldToggle.HOLD, () -> ModConfig.LOOK_HOLD_TOGGLE, v -> ModConfig.LOOK_HOLD_TOGGLE = v)
+                                .controller(o -> EnumControllerBuilder.create(o).enumClass(HoldToggle.class))
+                                .build())
+                        .option(Option.<HoldToggle>createBuilder()
+                                .name(Text.translatable(RearviewClient.MODID + ".config.show_rotation_hold_toggle"))
+                                .binding(HoldToggle.TOGGLE, () -> ModConfig.SHOW_ROTATION_HOLD_TOGGLE, v -> ModConfig.SHOW_ROTATION_HOLD_TOGGLE = v)
+                                .controller(o -> EnumControllerBuilder.create(o).enumClass(HoldToggle.class))
                                 .build())
                         .build())
                 .build()

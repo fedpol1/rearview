@@ -1,6 +1,6 @@
 package com.fedpol1.rearview.config;
 
-public enum LookHoldToggle {
+public enum HoldToggle {
     HOLD,
     TOGGLE
 }

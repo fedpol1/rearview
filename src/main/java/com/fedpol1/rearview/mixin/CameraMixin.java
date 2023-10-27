@@ -1,8 +1,10 @@
 package com.fedpol1.rearview.mixin;
 
 import com.fedpol1.rearview.util.CameraAngleManager;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.entity.Entity;
+import net.minecraft.text.*;
 import net.minecraft.world.BlockView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

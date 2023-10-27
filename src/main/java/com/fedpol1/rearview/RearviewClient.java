@@ -15,6 +15,6 @@ public class RearviewClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ModConfig.registerConfig();
-        KeyInputHandler.registerKeybind();
+        KeyInputHandler.registerKeybinds();
     }
 }
