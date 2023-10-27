@@ -1,4 +1,5 @@
 {
+  "rearview.config.category.misc": "Rearview",
   "key.rearview.lookbehind": "Look Behind",
   "key.rearview.show_rotation": "Show Rotation",
   "rearview.config.yaw_transform": "Yaw Modifier",
