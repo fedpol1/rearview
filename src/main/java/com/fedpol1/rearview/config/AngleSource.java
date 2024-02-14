@@ -7,7 +7,7 @@ public enum AngleSource {
     VEHICLE_MOTION,
     ROOT_VEHICLE,
     ROOT_MOTION,
-    CONSTANT;
+    ZERO;
 
     public boolean isMotion() {
         return this == AngleSource.SELF_MOTION || this == AngleSource.VEHICLE_MOTION || this == AngleSource.ROOT_MOTION;

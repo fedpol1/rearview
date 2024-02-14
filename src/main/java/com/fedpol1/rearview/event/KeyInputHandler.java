@@ -8,8 +8,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.MutableText;
+import net.minecraft.text.PlainTextContent;
 import net.minecraft.text.Style;
 import org.lwjgl.glfw.GLFW;
 import com.fedpol1.rearview.config.ModConfig;
@@ -41,9 +41,9 @@ public class KeyInputHandler {
             if(MinecraftClient.getInstance().player != null) {
                 if(showRotation) {
                 Camera camera = MinecraftClient.getInstance().gameRenderer.getCamera();
-                MinecraftClient.getInstance().player.sendMessage(MutableText.of(new LiteralTextContent(camera.getYaw() + " " + camera.getPitch())).setStyle(Style.EMPTY.withColor(0xbfbfbf)), true);
+                MinecraftClient.getInstance().player.sendMessage(MutableText.of(new PlainTextContent.Literal(camera.getYaw() + " " + camera.getPitch())).setStyle(Style.EMPTY.withColor(0xbfbfbf)), true);
                 } else if(showRotationInterrupt) {
-                    MinecraftClient.getInstance().player.sendMessage(MutableText.of(new LiteralTextContent("")), true);
+                    MinecraftClient.getInstance().player.sendMessage(MutableText.of(new PlainTextContent.Literal("")), true);
                 }
             }
         });

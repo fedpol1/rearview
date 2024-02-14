@@ -75,8 +75,8 @@ public class CameraAngleManager {
             if(yawSource == null) { CameraAngleManager.yaw = yaw; }
             else { CameraAngleManager.yaw = yawSource.getYaw(tickDelta); }
         }
-        else if(ModConfig.YAW_SOURCE == AngleSource.CONSTANT) {
-            CameraAngleManager.yaw = ModConfig.YAW_AUX;
+        else if(ModConfig.YAW_SOURCE == AngleSource.ZERO) {
+            CameraAngleManager.yaw = 0.0f;
         }
 
         if(ModConfig.PITCH_SOURCE.isMotion()) {
@@ -88,8 +88,8 @@ public class CameraAngleManager {
             if(pitchSource == null) { CameraAngleManager.pitch = pitch; }
             else { CameraAngleManager.pitch = pitchSource.getPitch(tickDelta); }
         }
-        else if(ModConfig.PITCH_SOURCE == AngleSource.CONSTANT) {
-            CameraAngleManager.pitch = ModConfig.PITCH_AUX;
+        else if(ModConfig.PITCH_SOURCE == AngleSource.ZERO) {
+            CameraAngleManager.pitch = 0.0f;
         }
     }
 
@@ -101,6 +101,8 @@ public class CameraAngleManager {
         if (ModConfig.PITCH_HANDLING == AngleHandling.REFLECT ^ CameraAngleManager.isReflected) {
             CameraAngleManager.pitch = -pitch;
         }
+        CameraAngleManager.yaw += ModConfig.YAW_AUX;
+        CameraAngleManager.pitch += ModConfig.PITCH_AUX;
         if (ModConfig.CAMERA_LOCK) CameraAngleManager.stale = true;
     }
 }

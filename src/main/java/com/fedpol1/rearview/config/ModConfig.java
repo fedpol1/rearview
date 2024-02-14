@@ -28,6 +28,7 @@ public class ModConfig {
     public static boolean CAMERA_LOCK;
     public static HoldToggle LOOK_HOLD_TOGGLE;
     public static HoldToggle SHOW_ROTATION_HOLD_TOGGLE;
+    public static boolean KEEP_SPECTATOR_MENU;
     public static final String S_YAW_HANDLING = "yaw_handling";
     public static final String S_PITCH_HANDLING = "pitch_handling";
     public static final String S_YAW_SOURCE = "yaw_source";
@@ -37,6 +38,7 @@ public class ModConfig {
     public static final String S_CAMERA_LOCK = "camera_lock";
     public static final String S_LOOK_HOLD_TOGGLE = "look_hold_toggle";
     public static final String S_SHOW_ROTATION_HOLD_TOGGLE = "show_rotation_hold_toggle";
+    public static final String S_KEEP_SPECTATOR_MENU = "keep_spectator_menu";
 
     public static void registerConfig() {
         ModConfig.readConfig();
@@ -53,6 +55,7 @@ public class ModConfig {
         ModConfig.CAMERA_LOCK = false;
         ModConfig.LOOK_HOLD_TOGGLE = HoldToggle.HOLD;
         ModConfig.SHOW_ROTATION_HOLD_TOGGLE = HoldToggle.TOGGLE;
+        ModConfig.KEEP_SPECTATOR_MENU = false;
     }
 
     public static void readConfig() {
@@ -73,6 +76,7 @@ public class ModConfig {
                     case S_CAMERA_LOCK -> ModConfig.CAMERA_LOCK = Boolean.parseBoolean(split[1]);
                     case S_LOOK_HOLD_TOGGLE -> ModConfig.LOOK_HOLD_TOGGLE = HoldToggle.valueOf(split[1]);
                     case S_SHOW_ROTATION_HOLD_TOGGLE -> ModConfig.SHOW_ROTATION_HOLD_TOGGLE = HoldToggle.valueOf(split[1]);
+                    case S_KEEP_SPECTATOR_MENU -> ModConfig.KEEP_SPECTATOR_MENU = Boolean.parseBoolean(split[1]);
                 }
             }
         }
@@ -94,7 +98,8 @@ public class ModConfig {
                     S_PITCH_AUX + "=" + ModConfig.PITCH_AUX + "\n" +
                     S_CAMERA_LOCK + "=" + ModConfig.CAMERA_LOCK + "\n" +
                     S_LOOK_HOLD_TOGGLE + "=" + ModConfig.LOOK_HOLD_TOGGLE + "\n" +
-                    S_SHOW_ROTATION_HOLD_TOGGLE + "=" + ModConfig.SHOW_ROTATION_HOLD_TOGGLE + "\n";
+                    S_SHOW_ROTATION_HOLD_TOGGLE + "=" + ModConfig.SHOW_ROTATION_HOLD_TOGGLE + "\n" +
+                    S_KEEP_SPECTATOR_MENU + "=" + ModConfig.KEEP_SPECTATOR_MENU + "\n";
 
             fw.write(acc);
             fw.close();
@@ -154,6 +159,11 @@ public class ModConfig {
                                 .name(Text.translatable(RearviewClient.MODID + ".config.show_rotation_hold_toggle"))
                                 .binding(HoldToggle.TOGGLE, () -> ModConfig.SHOW_ROTATION_HOLD_TOGGLE, v -> ModConfig.SHOW_ROTATION_HOLD_TOGGLE = v)
                                 .controller(o -> EnumControllerBuilder.create(o).enumClass(HoldToggle.class))
+                                .build())
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Text.translatable(RearviewClient.MODID + ".config.keep_spectator_menu"))
+                                .binding(false, () -> ModConfig.KEEP_SPECTATOR_MENU, v -> ModConfig.KEEP_SPECTATOR_MENU = v)
+                                .controller(TickBoxControllerBuilder::create)
                                 .build())
                         .build())
                 .build()
