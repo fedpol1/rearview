@@ -46,7 +46,7 @@ public class CameraAngleManager {
     }
 
     public static void setAngles(float yaw, float pitch) {
-        float tickDelta = MinecraftClient.getInstance().getRenderTickCounter().getTickDelta(true);
+        float tickDelta = MinecraftClient.getInstance().getRenderTickCounter().getDynamicDeltaTicks();
 
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if(player == null || CameraAngleManager.stale) {

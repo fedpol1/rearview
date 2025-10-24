@@ -54,13 +54,13 @@ public class KeyInputHandler {
                 KEY_NAME_LOOKBEHIND, // The translation key of the keybinding's name
                 InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
                 GLFW.GLFW_KEY_UNKNOWN, // The keycode of the key
-                KEY_CATEGORY_LOOKBEHIND // The translation key of the keybinding's category.
+                KeyBinding.Category.MISC // The translation key of the keybinding's category.
         ));
         showRotationKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 KEY_NAME_SHOW_ROTATION,
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
-                KEY_CATEGORY_SHOW_ROTATION
+                KeyBinding.Category.MISC
         ));
         registerClientTickEvents();
     }
