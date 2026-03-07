@@ -6,7 +6,8 @@
   "mixins": [],
   "client": [
     "CameraMixin",
-    "SpectatorHudMixin"
+    "SpectatorHudMixin",
+    "TeleportSpectatorMenuMixin"
   ],
   "server": [],
   "injectors": {

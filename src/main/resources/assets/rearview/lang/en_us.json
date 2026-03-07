@@ -11,5 +11,7 @@
   "rearview.config.lock": "Lock Camera",
   "rearview.config.look_hold_toggle": "Camera:",
   "rearview.config.show_rotation_hold_toggle": "Show Rotation:",
-  "rearview.config.keep_spectator_menu": "Keep Spectator Menu"
+  "rearview.config.keep_spectator_menu": "Keep Spectator Menu",
+  "rearview.config.filter_spectators": "Filter Spectators",
+  "rearview.config.sort_spectators": "Sort Spectators by Name"
 }

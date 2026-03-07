@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Rearview",
-  "description": "Adds a simple look-behind keybind.",
+  "description": "Adds a look-behind keybind.",
   "authors": [
     "FEDPOL1"
   ],

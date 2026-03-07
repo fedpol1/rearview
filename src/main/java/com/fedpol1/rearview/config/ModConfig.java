@@ -29,6 +29,8 @@ public class ModConfig {
     public static HoldToggle LOOK_HOLD_TOGGLE;
     public static HoldToggle SHOW_ROTATION_HOLD_TOGGLE;
     public static boolean KEEP_SPECTATOR_MENU;
+    public static boolean FILTER_SPECTATORS;
+    public static boolean SORT_SPECTATORS;
     public static final String S_YAW_HANDLING = "yaw_handling";
     public static final String S_PITCH_HANDLING = "pitch_handling";
     public static final String S_YAW_SOURCE = "yaw_source";
@@ -39,6 +41,8 @@ public class ModConfig {
     public static final String S_LOOK_HOLD_TOGGLE = "look_hold_toggle";
     public static final String S_SHOW_ROTATION_HOLD_TOGGLE = "show_rotation_hold_toggle";
     public static final String S_KEEP_SPECTATOR_MENU = "keep_spectator_menu";
+    public static final String S_FILTER_SPECTATORS = "filter_spectators";
+    public static final String S_SORT_SPECTATORS = "sort_spectators";
 
     public static void registerConfig() {
         ModConfig.readConfig();
@@ -56,6 +60,8 @@ public class ModConfig {
         ModConfig.LOOK_HOLD_TOGGLE = HoldToggle.HOLD;
         ModConfig.SHOW_ROTATION_HOLD_TOGGLE = HoldToggle.TOGGLE;
         ModConfig.KEEP_SPECTATOR_MENU = false;
+        ModConfig.FILTER_SPECTATORS = true;
+        ModConfig.SORT_SPECTATORS = false;
     }
 
     public static void readConfig() {
@@ -77,11 +83,13 @@ public class ModConfig {
                     case S_LOOK_HOLD_TOGGLE -> ModConfig.LOOK_HOLD_TOGGLE = HoldToggle.valueOf(split[1]);
                     case S_SHOW_ROTATION_HOLD_TOGGLE -> ModConfig.SHOW_ROTATION_HOLD_TOGGLE = HoldToggle.valueOf(split[1]);
                     case S_KEEP_SPECTATOR_MENU -> ModConfig.KEEP_SPECTATOR_MENU = Boolean.parseBoolean(split[1]);
+                    case S_FILTER_SPECTATORS -> ModConfig.FILTER_SPECTATORS = Boolean.parseBoolean(split[1]);
+                    case S_SORT_SPECTATORS -> ModConfig.SORT_SPECTATORS = Boolean.parseBoolean(split[1]);
                 }
             }
         }
         catch (IOException | IllegalArgumentException e) {
-            RearviewClient.LOGGER.error("Could not read configuration file.\n" + e.getMessage());
+            RearviewClient.LOGGER.error("Could not read configuration file.\n{}", e.getMessage());
             RearviewClient.LOGGER.info("Setting default configuration.");
             ModConfig.setDefaultConfig();
         }
@@ -99,7 +107,8 @@ public class ModConfig {
                     S_CAMERA_LOCK + "=" + ModConfig.CAMERA_LOCK + "\n" +
                     S_LOOK_HOLD_TOGGLE + "=" + ModConfig.LOOK_HOLD_TOGGLE + "\n" +
                     S_SHOW_ROTATION_HOLD_TOGGLE + "=" + ModConfig.SHOW_ROTATION_HOLD_TOGGLE + "\n" +
-                    S_KEEP_SPECTATOR_MENU + "=" + ModConfig.KEEP_SPECTATOR_MENU + "\n";
+                    S_KEEP_SPECTATOR_MENU + "=" + ModConfig.KEEP_SPECTATOR_MENU + "\n" +
+                    S_SORT_SPECTATORS + "=" + ModConfig.SORT_SPECTATORS + "\n";
 
             fw.write(acc);
             fw.close();
@@ -163,6 +172,16 @@ public class ModConfig {
                         .option(Option.<Boolean>createBuilder()
                                 .name(Text.translatable(RearviewClient.MODID + ".config.keep_spectator_menu"))
                                 .binding(false, () -> ModConfig.KEEP_SPECTATOR_MENU, v -> ModConfig.KEEP_SPECTATOR_MENU = v)
+                                .controller(TickBoxControllerBuilder::create)
+                                .build())
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Text.translatable(RearviewClient.MODID + ".config.filter_spectators"))
+                                .binding(true, () -> ModConfig.FILTER_SPECTATORS, v -> ModConfig.FILTER_SPECTATORS = v)
+                                .controller(TickBoxControllerBuilder::create)
+                                .build())
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Text.translatable(RearviewClient.MODID + ".config.sort_spectators"))
+                                .binding(false, () -> ModConfig.SORT_SPECTATORS, v -> ModConfig.SORT_SPECTATORS = v)
                                 .controller(TickBoxControllerBuilder::create)
                                 .build())
                         .build())
